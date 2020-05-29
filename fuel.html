@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/c7d1b26241.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <title>Fuel Station Finder</title>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <div class=.col-md-6.m-auto>
+                <h3 class="text-center mb-3">
+                    <i class="fas fa-gas-pump"></i> NJDOT Fuel Station Finder
+                </h3>
+                <div class="mb-5" id="location-data"></div>
+                <div id="fuel-stations"></div>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block mb-3" id="search">Search</button>
+            <button class="btn btn-primary btn-lg btn-block mb-3" id="location" onclick="getLocation()">Get Location</button>
+            <a href="index.html">
+                <h3 class="text-center mb-3"><i class="fas fa-undo"></i></h3>
+            </a>
+        </div>
+        <script src="js/fuel.js"></script>
+    </body>
+</html>
