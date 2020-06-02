@@ -1,13 +1,25 @@
 const search = document.getElementById('search')
 const fuelStations = document.getElementById('fuel-stations');
 const locationData = document.getElementById('location-data')
-const userPosition = navigator.geolocation.getCurrentPosition;
-
-const sortFuelStations = async userLocation => {
-    const res = await fetch('../bridge-navigator/data/fuel.json');
-    const stations = await res.json();
-
-    outputHtml(stations);
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(sortFuelStations);
+  } else {
+    locationData.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+async function sortFuelStations(position) {
+  const userLatitude = position.coords.latitude;
+  const userLongitude = position.coords.longitude;
+  const res = await fetch('/data/fuel.json'); //'../bridge-navigator/data/fuel.json'
+  const stations = await res.json();
+  const sortedStations = stations.sort(function(a, b) {
+    if (Math.hypot(a.latitude - userLatitude, a.longitude - userLongitude) > Math.hypot(b.latitude - userLatitude, b.longitude - userLongitude)
+    ) return -1;
+  if (Math.hypot(a.latitude - userLatitude, a.longitude - userLongitude) < Math.hypot(b.latitude - userLatitude, b.longitude - userLongitude)
+    ) return 1;
+  });
+  outputHtml(sortedStations);
 }
 const outputHtml = stations => {
     const html = stations.map(station => `
@@ -15,26 +27,14 @@ const outputHtml = stations => {
             <div class="card-header"><a href="https://www.google.com/maps/search/?api=1&query=${station.latitude},${station.longitude}">${station.location}</a></div>
             <div class="card-body">
                 <p class="card-text">
-                <small>${station.address}, ${station.county}</small><br>
-                <small>Hours: ${station.hours},<br> Fuel Type:  ${station.fuel}</small><br>
-                <small>Lat/Long: ${station.latitude},${station.longitude}</small>
+                ${station.address}, ${station.county} County<br>
+                Hours: ${station.hours}<br> 
+                Fuel Type:  ${station.fuel}<br>
+                <a href="https://www.google.com/maps/search/?api=1&query=${station.latitude},${station.longitude}">Lat/Long: ${station.latitude},${station.longitude}</a>
                 </p>
             </div>
         </div>
     `).join('');
     fuelStations.innerHTML = html;
 }
-search.addEventListener('click', () => sortFuelStations());
-
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    locationData.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
-
-function showPosition(position) {
-  locationData.innerHTML = "Latitude: " + position.coords.latitude +
-  "<br>Longitude: " + position.coords.longitude;
-}
+search.addEventListener('click', () => getLocation());
