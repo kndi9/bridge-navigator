@@ -15,9 +15,9 @@ async function sortFuelStations(position) {
   const stations = await res.json();
   const sortedStations = stations.sort(function(a, b) {
     if (Math.hypot(a.latitude - userLatitude, a.longitude - userLongitude) > Math.hypot(b.latitude - userLatitude, b.longitude - userLongitude)
-    ) return -1;
-  if (Math.hypot(a.latitude - userLatitude, a.longitude - userLongitude) < Math.hypot(b.latitude - userLatitude, b.longitude - userLongitude)
     ) return 1;
+  if (Math.hypot(a.latitude - userLatitude, a.longitude - userLongitude) < Math.hypot(b.latitude - userLatitude, b.longitude - userLongitude)
+    ) return -1;
   });
   outputHtml(sortedStations);
 }
