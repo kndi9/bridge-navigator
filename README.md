@@ -1,7 +1,7 @@
 # bridge-navigator
 A simple auto-complete app to navigate NJ Bridges and fueling stations for inspection purposes.
 
-Raw data can be found here: https://www.state.nj.us/transportation/refdata/sldiag/
+Raw data can be found here: https://infobridge.fhwa.dot.gov/Data/Map & https://www.nj.gov/treasury/administration/statewide-support/motor-fuel-locations.shtml
 
 I learned the basiscs from here:https://www.theodinproject.com
 
