@@ -3,7 +3,8 @@ const matchList = document.getElementById('match-list');
 
 //Search structures.json and filter it
 const searchStructures = async searchText => {
-    const res = await fetch('../bridge-navigator/data/state-structures.json');
+    // const res = await fetch('../bridge-navigator/data/mdstructures.json');
+    const res = await fetch('data/mdstructures.json');
     const structures = await res.json();
     
     //Get matches to current text input

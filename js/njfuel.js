@@ -11,7 +11,7 @@ function getLocation() {
 async function sortFuelStations(position) {
   const userLatitude = position.coords.latitude;
   const userLongitude = position.coords.longitude;
-  const res = await fetch('../bridge-navigator/data/fuel.json');
+  const res = await fetch('../bridge-navigator/data/njfuel.json');
   const stations = await res.json();
   const sortedStations = stations.sort(function(a, b) {
     if (Math.hypot(a.latitude - userLatitude, a.longitude - userLongitude) > Math.hypot(b.latitude - userLatitude, b.longitude - userLongitude)
