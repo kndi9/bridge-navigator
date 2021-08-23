@@ -4,7 +4,7 @@ const matchList = document.getElementById('match-list');
 //Search structures.json and filter it
 const searchStructures = async searchText => {
     // const res = await fetch('../bridge-navigator/data/destructures.json');
-    const res = await fetch('data/destructurescopy.json');
+    const res = await fetch('data/destructures.json');
     const structures = await res.json();
     
     //Get matches to current text input
